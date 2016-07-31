@@ -220,9 +220,9 @@ function z(t)
       print(">>",i)
 end end end
 
-function nwhere(all,t) return nwhere1(all, NWHERE(t)) end
+function nwhere(all,t) return nwhere_(all, NWHERE(t)) end
 
-function nwhere1( all, o)
+function nwhere_( all, o)
   o.enough = max((#all)^o.cull,o.stop)
   ------------------------------------------------------
   local function  dist(r1,r2)
@@ -314,9 +314,9 @@ function _nwhere()
       row.cluster = i end end
 end
 
-function ranges(items,t) return ranges1(items, RANGES(t)) end
+function ranges(items,t) return ranges_(items, RANGES(t)) end
  
-function ranges1(items,o)
+function ranges_(items,o)
   o.tiny   = o.tiny   or sd(num0(collect(items,o.x))) * o.cohen
   o.enough = o.enough or (#items)^0.5
   local function xpect(l,r,n) return l.n/n*ent(l) + r.n/n*ent(r) end
@@ -407,11 +407,11 @@ function bestThing(rows,t)
 end
 
 function dichotomize(t,report)
-  return dichotomize1(t,DICHOTOMIZE(),report) end
-function dichotomize1(t,o,report)
-  return dichotomize2(t._rows,t,o,report) end
+  return dichotomize_(t,DICHOTOMIZE(),report) end
+function dichotomize_(t,o,report)
+  return dichotomize__(t._rows,t,o,report) end
 
-function dichotomize2(rows,t,o,report,lvl)
+function dichotomize__(rows,t,o,report,lvl)
   lvl= lvl or 0
   report = report or function (z) return #z end
   assert(lvl < 20)
@@ -440,7 +440,7 @@ function _ranges1()
   for i= 2*n+1,3*n,1 do t[#t+1]= {i- n + n*2*r(), c} end
   local t1 = shuffle(t)
   print("===")
-  for _,r in pairs(ranges1(t1,RANGES{verbose=true})) do
+  for _,r in pairs(ranges_(t1,RANGES{verbose=true})) do
     print(r,ent(r.y))
   end
 end
@@ -483,7 +483,7 @@ function _ranges2()
     for _,row in pairs(rows) do
       t._rows[row.id].cluster  = "C"..i end end
   for _,thing in pairs(t.xnums) do
-    local rs = ranges1(t._rows,
+    local rs = ranges_(t._rows,
 		      RANGES{x=function (z) return z.cells[thing.col] end,
 			     y=function (z) return z.cluster end
                             })
