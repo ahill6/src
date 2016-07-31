@@ -198,7 +198,7 @@ end
 
 function _csv()   
   local n=0
-  for line in csv('../data/weather.csv') do
+  for line in csv('data/weather.csv') do
     n= n+1
     if line then
       print(n,#line, table.concat(line,","))
@@ -292,7 +292,7 @@ function nwhere1( all, o)
 end
 
 function _row()
-  local t = csv2tbl('../data/autos.arff')
+  local t = csv2tbl('data/autos.arff')
   print("\n----| NUMBERS |---------------------------")
   for _,thing in pairs(t.nums) do
     print(thing.txt, {mu=f5(thing.mu), sd=f5(sd(thing)), lo=thing.lo,up=thing.up})
@@ -305,7 +305,7 @@ function _row()
 end
 
 function _nwhere()
-  local t= csv2tbl('../data/autos.arff')
+  local t= csv2tbl('data/autos.arff')
   normys(t)
   print("======")
   for i,rows in pairs(nwhere(t._rows,{verbose=true})) do
@@ -448,7 +448,7 @@ end
 function _dich()
   rseed(1)
   print("")
-  local t= csv2tbl('../data/autos.arff')
+  local t= csv2tbl('data/autos.arff')
   s=function(t,n) return pround(norm(t,n)) end
   normys(t)
   local clusters={}
@@ -476,7 +476,7 @@ end
 --- looke like tostring is eating all numberic idenxes
 
 function _ranges2()
-  local t= csv2tbl('../data/autos.arff')
+  local t= csv2tbl('data/autos.arff')
   normys(t)
   print("======")
   for i,rows in pairs(nwhere(t._rows,{verbose=true})) do
