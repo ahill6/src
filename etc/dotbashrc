@@ -1,11 +1,13 @@
 # -*- sh -*- 
 
-echo "all v1.0 (c) 2016 Tim Menzies, MIT (v2) license"
+what="ell"
+echo "$what v1.0 (c) 2016 Tim Menzies, MIT (v2) license"
+echo "\"I tread paths by moonlight that  others fear to speak of during day.\" --Rothfuss"
 echo
 
 mine=/tmp/$USER/$$
 tmp=/tmp/$USER/$$/tmp
-mkdir -p ${mine} {tmp}
+mkdir -p ${mine} ${tmp}
 
 Seed=0
 
@@ -78,7 +80,7 @@ reload() { . "$Here"/etc/dotbashrc ; }
 	
 here() { cd $1; basename "$PWD"; }
 
-PROMPT_COMMAND='echo  -ne "ALL:\033]0; $(here ..)/$(here .)\007"
+PROMPT_COMMAND='echo  -ne "${what}:\033]0; $(here ..)/$(here .)\007"
 PS1=" $(here ..)/$(here .) \!> "'
 
 fyi() { echo "$@" 1>&2; } 
