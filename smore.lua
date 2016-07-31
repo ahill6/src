@@ -21,7 +21,7 @@ local function ROW(t)
   return {id=ID(),   cells=t,   normy={}, normx={}} end
 
 local function TBL(t) return {
-    things={}, _rows={}, less={}, ynums={}, xnums={},
+    things={}, _rows={}, less={}, ynums={}, xnums={},n=0,
     more={}, spec=t, outs={}, ins={}, syms={}, xsyms={}, nums={}}
 end
 
@@ -41,8 +41,12 @@ local function NWHERE(t) return plus(
 end
 
 local function DICHOTOMIZE(t) return plus(
-    {min=10}, t)
-end  
+    {min=5}, t)
+end
+
+local function NODE(rows,spec,best,keys) return {
+    id=ID(), _tbl = rows2tbl(rows,spec) ,  best=best, keys= keys, kids={}} end
+
 ----------------------------------------------------------------
 local function sym1(i,one)
   if one ~= IGNORE then
@@ -152,7 +156,7 @@ local function csv(f)
 end end end
 
 ----------------------------------------------------------------
-local function row1(cells, t)
+local function row1(t, cells)
   local function whoWheres(cell,t)
     local spec =  { 
       {what= "%$", who= num0, wheres= {t.things, t.ins,  t.nums, t.xnums  }},
@@ -179,6 +183,7 @@ local function row1(cells, t)
   ------------------------------
   local function data(t,row) 
     t._rows[row.id] = row
+    t.n = t.n + 1
     for _,thing in pairs(t.things) do
       local passed,err = pcall(function () thing1(thing, cells[thing.col]) end)
       if not passed then
@@ -192,10 +197,17 @@ local function row1(cells, t)
 end
 
 function csv2tbl(f,     t)
-  for row in csv(f) do t = row1(row, t) end
+  for row in csv(f) do t = row1(t,row) end
   return t
 end
 
+function rows2tbl(rows, spec, t)
+  t = row1(t, spec)
+  for _,row in pairs(rows) do
+    t = row1(t, copy(row.cells)) end
+  return t
+end
+  
 function _csv()   
   local n=0
   for line in csv('data/weather.csv') do
@@ -384,7 +396,7 @@ local function thingScore(rows,x,y)
     v[#v + 1] = row
     splits[x1] = v 
   end
-  --table.sort(keys)
+  table.sort(keys)
   local xpect = 0
   for x,sym in pairs(syms) do
     xpect = xpect + sym.n/#rows * ent(sym)
@@ -406,30 +418,40 @@ function bestThing(rows,t)
   return best,splits,keys
 end
 
-function dichotomize(t,report)
-  return dichotomize_(t,DICHOTOMIZE(),report) end
-function dichotomize_(t,o,report)
-  return dichotomize__(t._rows,t,o,report) end
+function dichotomize(t,all)
+  return dichotomize_(t,DICHOTOMIZE(),all) end
+function dichotomize_(t,o,all)
+  return dichotomizing(t._rows,t,o,all) end
 
-function dichotomize__(rows,t,o,report,lvl)
-  lvl= lvl or 0
-  report = report or function (z) return #z end
+function dichotomizing(rows,t,o, all, lvl, here)
+  lvl = lvl or 0
+  all = all or {}
   assert(lvl < 20)
-  if #rows <= o.min then
-    print(#rows, report(rows))
-  else
-    print("")
-    local best, splits, keys  = bestThing(rows,t)
+  if #rows >= o.min then
+    local best, splits, keys = bestThing(rows,t)
+    here = NODE(rows, t.spec, best, keys)
+    all[#all + 1] = here
     for i=1,#keys do
-      local k = keys[i]
-      local subs= splits[k]
-      local str = nstr('|.. ',lvl) .. best.txt ..  "=" .. k .. ':'
-      --if #subs >= o.min then
-      io.write(str .. nstr(" ", 50-#str))
-      dichotomize2(subs,t,o,report, lvl+1)
-    
-      
-end end end 
+      local k    = keys[i]
+      local subs = splits[k]
+      if #subs < #rows then
+        here.kids[k]  = dichotomizing(subs,t,o,all, lvl+1)
+    end end end
+  return here
+end
+
+function treeshow(node,lvl)
+  lvl = lvl or 0
+  if node then
+    for i=1,#node.keys do
+      local k    = node.keys[i]
+      local subs = node.kids[k]
+      if subs  then
+        local n = subs._tbl.n
+        local str = nstr('|.. ',lvl) .. node.best.txt ..  "=" .. k
+        io.write(str .. nstr(" ", 50-#str),"|",n,"\n")
+        treeshow(subs, lvl+1)
+      end end end end
     
 function _ranges1()
   local a,b,c="a","b","c"
@@ -457,8 +479,9 @@ function _dich()
       t._rows[row.id].cluster  = i end
     clusters[i] = rows
   end
-  local report= function (rows) return summary(t,rows) end
-  dichotomize(t,report)  
+  local all= {}
+  treeshow(dichotomize(t,all))
+  print(#all,all[1]._tbl.n)
 end
 
 function summary(t,rows)

@@ -1,6 +1,6 @@
-# Factories
+# Factories #
 
-## Overview
+## Overview ##
 
 SMORE does not use classes (since the open
 nature of Lua's "class" system can be problematic). Instead,
@@ -8,17 +8,17 @@ SMORE uses factory functions to generated Lua tables
 that correspond to some standard structure.
 
 My factory system uses four kinds
-of functions: _templates_, _creators_, _setters_, and
+of functions: _templates_, _creators_, _update_, and
 _overrides_:
 
 - _Template_ functions are all in upper case;
-- _Birth_ function names end with `0`;
-- _Setter_ functions update data;
+- _Create_ function names end with `0`;
+- _Update_ functions update data;
 - _Override_ functions allow for the overriding of defauls.
 
 For example:
 
-### Template Example
+### Template Functions ###
 
 For example, when tracking a series of numbers,
 we use a `NUM` _template_ function
@@ -30,9 +30,9 @@ and some other details:
       return {n=0,  mu=0, m2=0,up=-1e32, lo=1e32 }
     end
 
-### Setter Example
+### Update Functions ###
 
-Such `NUM`s can be updated using the `num1` _setter_ function
+Such `NUM`s can be updated using the `num1` _update_ function
 that updates the slots (e.g. increments `n` by one,
 perhaps updates the `lo` and `up` values, etc.
 
@@ -54,27 +54,28 @@ method for incrementally computing standard deviation
   (see below: the `sd` function).
 
 
-### Birth Example
+### Create Functions ###
 
-Such `NUM`s are created by a `num0` _birth_ function
+Such `NUM`s are created by a `num0` _create_ function
 which calls `NUM` to get a template, then runs over
 `init`ilization values (calling `num1` each time to update
 the `NUM`:
 
     function num0(inits)
-      return map2(inits, NUM(), num1)
+      return maps(inits, NUM(), num1)
     end
     
-    function map2(t,i,f)
+    function maps(t,i,f)
       if t then
         for _,v in pairs(t) do f(i,v) end
       end
       return i
     end
 
+### In Use ###
 
 Once we have some updates to our `NUM`, we can use them to define some useful
-services; e.g. compute the standard deviation or normalize some number:
+services; e.g. compute the standard deviation or normalize some number `x` in the range zero to one:
 
     function sd(i)
       return i.n <= 1 and 0 or (i.m2 / (i.n - 1))^0.5
