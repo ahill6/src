@@ -75,7 +75,7 @@ function map(t,f)
     for i,v in pairs(t) do f(v)
 end end end
 
-function map2(t,i,f)
+function maps(t,i,f)
   if t then
     for _,v in pairs(t) do f(i,v) end
   end

@@ -82,8 +82,8 @@ end end
 local function thing1(i,one)   return (nump(i) and num1  or sym1 )(i,one) end
 local function unthing1(i,one) return (nump(i) and unnum or unsym)(i,one) end
 
-local function sym0(inits) return map2(inits, SYM(), sym1) end
-local function num0(inits) return map2(inits, NUM(), num1) end
+local function sym0(inits) return maps(inits, SYM(), sym1) end
+local function num0(inits) return maps(inits, NUM(), num1) end
 
 local function sd(i)
   return i.n <= 1 and 0 or (i.m2 / (i.n - 1))^0.5

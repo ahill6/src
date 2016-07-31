@@ -1,8 +1,8 @@
 # -*- sh -*- 
 
-what="ell"
+what="ELL"
 echo "$what v1.0 (c) 2016 Tim Menzies, MIT (v2) license"
-echo "\"I tread paths by moonlight that  others fear to speak of during day.\" --Rothfuss"
+echo "\"I tread paths by moonlight that others fear to speak of during day.\" --Rothfuss"
 echo
 
 mine=/tmp/$USER/$$
