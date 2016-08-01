@@ -137,11 +137,11 @@ end
 local function bdom(t1,t2)
   local n = 0
   for i,x in pairs(t1.less) do
-    y = t2.less[i]
+    local y = t2.less[i]
     if different(x,y) then
       if x.mu < y.mu then n= n+1 else return false end end end
   for i,x in pairs(t1.more) do
-    y = t2.more[i]
+    local y = t2.more[i]
     if different(x, y) then
       if x.mu > y.mu then n= n+1 else return false end end end 
   return n > 0 
@@ -294,9 +294,9 @@ function z(t)
       print(">>",i)
 end end end
 
-function nwhere(all,t) return nwhere_(all, NWHERE(t)) end
+function nwhere(all,t) return nwhering(all, NWHERE(t)) end
 
-function nwhere_( all, o)
+function nwhering( all, o)
   o.enough = max((#all)^o.cull,o.stop)
   ------------------------------------------------------
   local function  dist(r1,r2)
@@ -388,9 +388,9 @@ function _nwhere()
       row.cluster = i end end
 end
 
-function ranges(items,t) return ranges_(items, RANGES(t)) end
+function ranges(items,t) return ranging(items, RANGES(t)) end
  
-function ranges_(items,o)
+function ranging(items,o)
   o.tiny   = o.tiny   or sd(num0(collect(items,o.x))) * o.cohen
   o.enough = o.enough or (#items)^0.5
   local function xpect(l,r,n) return l.n/n*ent(l) + r.n/n*ent(r) end
@@ -492,7 +492,7 @@ function dichotomizing(rows,t,o, all, lvl, here)
   if #rows >= o.min then
     local best, splits, keys = bestThing(rows,t)
     here = NODE(rows, t.spec, best, keys)
-    all[#all + 1] = here
+    all[#all + 1] = here._tbl
     for i=1,#keys do
       local k    = keys[i]
       local subs = splits[k]
@@ -543,11 +543,16 @@ function _dich()
   end
   local all= {}
   treeshow(dichotomize(t,all))
-  for i,rows in pairs(all) do
-    print(rows[1])
-    clusters[i] = rows2tbl(rows, t.spec)
-  end
-  print(#all,all[1]._tbl.n)
+  for i,t1 in pairs(all) do
+    for j,t2 in pairs(all) do
+      if i ~= j then
+        if bdom(t1,t2) then
+          print(i,j) end end end end
+
+--  xx=row1(nil,t.spec)
+  --for _,row in pairs(clusters[1]) do
+    --xx  = row1(xx,row.cells)
+  --end
 end
 
 function summary(t,rows)
