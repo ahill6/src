@@ -54,6 +54,8 @@ function sub(t, first, last)
 end
 
 function same(x) return x end
+
+
 -------------------------------------------------------
 do
   local seed0     = 10013
@@ -265,3 +267,22 @@ do
     else for s,x in pairs(t) do test(s,x) end
          report() end end
 end
+
+function xtend(x,xs,ys,  x1,y1)
+  local function out(x,x0,y0,x1,y1)
+    return y0 + (x - x0) / (x1 - x0)*(y1 - y0) end
+  local x0,y0 = xs[1],ys[1]
+  if x < x0  then
+    return out(x,xs[1], ys[1], xs[2], ys[2]) end
+  if x > xs[#xs] then
+    return out(x, xs[#xs-1], ys[#ys-1], xs[#xs], ys[#ys]) end
+  for i=1,#xs do
+    x1,y1 = xs[i],ys[i]
+    if x0<=x and x<x1 then break end
+    x0,y0 = x1,y1
+  end
+  return out(x,x0,y0,x1,y1)
+end
+
+
+

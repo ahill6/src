@@ -98,6 +98,68 @@ local function norm(i,x)
   return (x - i.lo) / (i.up - i.lo + 1e-32)
 end
 
+local function smallEffect(i,j, small)
+  local small = small or  0.38 -- less severe=0.38. strict=0.17
+  local num   = (i.n - 1)*sd(i)^2 + (j.n - 1)*sd(j)^2
+  local denom = (i.n - 1) + (j.n - 1)
+  local sp    = ( num / denom )^0.5
+  local delta = abs(i.mu - j.mu) / sp  
+  local c     = 1 - 3.0 / (4*(i.n + j.n - 2) - 1)
+  return delta * c < small
+end
+
+local function different(i,j,    conf)
+  local function threshold(df, conf)
+    conf = conf or 99
+    local xs = {     1,     2,     5,    10,    15,
+                    20,    25,    30,    60,   100}
+    local ys = {}
+    ys[0.90] = { 3.078, 1.886, 1.476, 1.372, 1.341,
+                 1.325, 1.316, 1.31 , 1.296, 1.29 }
+    ys[0.95] = { 6.314, 2.92,  2.015, 1.812, 1.753,
+                 1.725, 1.708, 1.697, 1.671, 1.66 } 
+    ys[0.99] = {31.821, 6.965, 3.365, 2.764, 2.602,
+                 2.528, 2.485, 2.457, 2.39,  2.364}
+    return xtend(df,xs,ys[conf])
+  end
+  conf = conf or 0.9
+  local denom, nom = 1, i.mu - j.mu
+  local s1, s2 = sd(i), sd(j)
+  if s1+s2 > 0 then denom = (s1^2/i.n + s2^2/j.n)^0.5 end
+  local df =  math.floor(0.5 +
+                (  s1^2/i.n               +    s2^2/j.n)^2  /
+                ( (s1^2/i.n)^2 / (i.n -1) + ( (s2^2/j.n)^2 / (j.n - 1))))
+  local diff    = threshold(df, conf) > nom/denom
+  local trivial = smallEffect(i,j)
+  return diff and not trivial
+end
+
+local function bdom(t1,t2)
+  local n = 0
+  for i,x in pairs(t1.less) do
+    y = t2.less[i]
+    if different(x,y) then
+      if x.mu < y.mu then n= n+1 else return false end end end
+  for i,x in pairs(t1.more) do
+    y = t2.more[i]
+    if different(x, y) then
+      if x.mu > y.mu then n= n+1 else return false end end end 
+  return n > 0 
+end
+
+function _different()
+  local max=100
+  for i=1,max,6 do
+    local n1,n2 = num0(), num0()
+    for _= 1,200 do
+      num1(n1,r())
+      num1(n2,1.2*r())
+    end
+    print{i=i,conc=different(n1,n2),
+          mu1=f3(n1.mu), mu2=f3(n2.mu),
+          sd1=f3(sd(n1)),sd2=f3(sd(n2))}
+end end
+
 local function ent(i)
   local e = 0
   for _,f in pairs(i.counts) do
@@ -481,6 +543,10 @@ function _dich()
   end
   local all= {}
   treeshow(dichotomize(t,all))
+  for i,rows in pairs(all) do
+    print(rows[1])
+    clusters[i] = rows2tbl(rows, t.spec)
+  end
   print(#all,all[1]._tbl.n)
 end
 
