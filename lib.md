@@ -1,9 +1,6 @@
 
 
-<img 
- align=right
- src="https://upload.wikimedia.org/wikipedia/en/0/04/Duracell_Bunny.png"
->
+<img align=right  src="https://upload.wikimedia.org/wikipedia/en/0/04/Duracell_Bunny.png">
 
 # lib.lua
 
