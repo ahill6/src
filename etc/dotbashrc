@@ -152,11 +152,17 @@ lua2md() {
     stem=${1%.*}
     in=${stem}.lua
     out=${stem}.md
-    echo $stem $in $out
     gawk '
-    gsub(/--\[=\[/,"",$0) { if (In) print "```" ; In = 0; }
-    gsub(/--\]=\]/,"",$0) { In = 1 ; print "```lua" } 
-                        1 
+    gsub(/^-- /,"") {  Pre = Pre "\n" $0 ; next }
+    gsub(/^--\[=\[/,"",$0) { if (In) print "```" ; In = 0; }
+    gsub(/^--\]=\]/,"",$0) { In = 1 ; print "```lua" } x   
+                        1  { if (Pre) { 
+                               if (In) 
+                                  print "```" 
+                               print Pre "\n\n```lua"
+                               Pre=""
+                             }
+                           print $0; }
                       END { if (In) print "```" } ' $in > $out
     git add $out
 }

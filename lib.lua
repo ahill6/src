@@ -10,7 +10,8 @@ Here's mine:
 
 ## Maths
 
-Basic stuff:
+### Basic Stuff
+
 --]=]
 
 function max(a,b) return a > b and a or b end
@@ -19,27 +20,49 @@ function abs(x)   return x >= 0 and x or -1*x end
 
 --[=[
 
-aa
+### Rounding
+
+Three ways to round numbers:
+
+- `rnd` is the simplest, sends it to the nearest integer;
+- `pround` does the same, but multiplies by 100;
+- `round` is the most complex. Rounded to some factor `f`.
 
 --]=]
-function pround(num)
-  return math.floor(100*num+0.5)
-end
 
-function round(num, idp)
-  if idp and idp>0 then
-    local mult = 10^idp
+function rnd(x)
+  return math.floor(x + 0.5) end
+
+function pround(num)
+  return math.floor(100*num+0.5) end
+
+function round(num,f)
+  if f and f>0 then
+    local mult = 10^f
     return math.floor(num * mult + 0.5) / mult
   end
   return math.floor(num + 0.5)
 end
+
 --[=[
+
 
 ## Lists
 
+### Basic Stuff
+
 --]=]
+
 function first(x) return x[1]  end
 function last(x)  return x[#x] end
+
+--[=[
+
+### Shuffle
+
+`Shuffle` randomly reorganizes the slots in  table.
+
+--]=]
 
 function shuffle( t )
   for i= 1,#t do
@@ -49,7 +72,7 @@ function shuffle( t )
   return t
 end
 
-function _shuffle()
+function _shuffle() -- test for shuffle
   for i=1,40 do
     local t = shuffle{1,2,3,4,5,6}
     local t1={}
@@ -60,11 +83,23 @@ function _shuffle()
   end
 end
 
-function dot(x) io.write(x); io.flush() end
+-- ### Any item in  list
+-- You know?
+-- xxx
 
 function any(t)
   local pos =  math.floor(0.5 + r() * #t)
   return t[ min(#t,max(1,pos)) ]
+end
+
+--[=[
+
+## String
+
+--]=]
+
+function dot(x) -- write without new line
+  io.write(x); io.flush()
 end
 
 function sub(t, first, last)
@@ -79,6 +114,12 @@ end
 
 function same(x) return x end
 
+
+--[=[
+
+## String
+
+--]=]
 
 -------------------------------------------------------
 do
@@ -149,6 +190,14 @@ function s3(x) return string.format('%3s',x) end
 function s5(x) return string.format('%5s',x) end
 
 function nstr(x,n) return string.rep(x,n) end
+
+--[=[
+
+## String
+
+--]=]
+
+
 ------------------------------------------------------
 function args(settings,ignore, updates)
   updates = updates or arg
@@ -180,6 +229,13 @@ function _args()
     print(args({a=1,c=false,kkk=22},{"args"})) end
 end
 
+--[=[
+
+## String
+
+--]=]
+
+
 -------------------------------------------------------
 function rogue()
   local tmp={}
@@ -197,6 +253,13 @@ function rogue()
     for i,v in pairs(tmp) do
       print("    ",i,v)
 end end end
+
+--[=[
+
+## String
+
+--]=]
+
 -------------------------------------------------------
 -- print table contents
 -- print tables in sorted key order
@@ -268,7 +331,13 @@ function tostring(t,seen)
   out[#out+1] = "}"
   return table.concat(out)
 end
--------------------------------------------
+
+--[=[
+
+## String
+
+--]=]
+
 do
   local y,n = 0,0
   -------------------------------
@@ -291,6 +360,12 @@ do
     else for s,x in pairs(t) do test(s,x) end
          report() end end
 end
+
+--[=[
+
+## String
+
+--]=]
 
 function xtend(x,xs,ys,  x1,y1)
   local function out(x,x0,y0,x1,y1)
