@@ -12,9 +12,11 @@ Here's mine:
 
 Basic stuff:
 --]=]
+
 function max(a,b) return a > b and a or b end
 function min(a,b) return a < b and a or b end
 function abs(x)   return x >= 0 and x or -1*x end
+
 --[=[
 
 aa
