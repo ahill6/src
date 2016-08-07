@@ -46,7 +46,7 @@ end
 function first(x) return x[1]  end
 function last(x)  return x[#x] end
 
--- ### Shuffle(table)
+-- ### shuffle(table)
 -- `Shuffle` randomly reorganizes the slots in  table.
 
 function shuffle( t )
@@ -70,7 +70,7 @@ function _shuffle()
   end
 end
 
--- ### Any(table) 
+-- ### any(table) 
 -- Any item in a table.
 
 function any(t)
@@ -79,7 +79,7 @@ function any(t)
 end
 
 -- ## String Functions
--- ### Dot(thing)
+-- ### dot(thing)
 -- Write to screen, no new line.
 
 function dot(x)  io.write(x); io.flush() end
@@ -114,7 +114,6 @@ The high-level interface is
 
 --]=]
 
--------------------------------------------------------
 do
   local seed0     = 10013
   local seed      = seed0
