@@ -18,23 +18,18 @@ function max(a,b) return a > b and a or b end
 function min(a,b) return a < b and a or b end
 function abs(x)   return x >= 0 and x or -1*x end
 
---[=[
-
-### Rounding
-
-
-
-- `rnd` is the simplest, sends it to the nearest integer;
-- `pround` does the same, but multiplies by 100;
-- `round` is the most complex. Rounded to some factor `f`.
-
---]=]
+-- ### Rounding
+-- `rnd` is the simplest, sends it to the nearest integer;
 
 function rnd(x)
   return math.floor(x + 0.5) end
 
+-- `pround` does the same, but multiplies by 100;
+
 function pround(num)
   return math.floor(100*num+0.5) end
+
+-- `round` is the most complex. Rounded to some factor `f`.
 
 function round(num,f)
   if f and f>0 then
@@ -44,25 +39,14 @@ function round(num,f)
   return math.floor(num + 0.5)
 end
 
---[=[
-
-
-## Lists
-
-### Basic Stuff
-
---]=]
+-- ## Lists
+--- ### Basic Stuff
 
 function first(x) return x[1]  end
 function last(x)  return x[#x] end
 
---[=[
-
-### Shuffle
-
-`Shuffle` randomly reorganizes the slots in  table.
-
---]=]
+-- ### Shuffle
+-- `Shuffle` randomly reorganizes the slots in  table.
 
 function shuffle( t )
   for i= 1,#t do
@@ -72,7 +56,9 @@ function shuffle( t )
   return t
 end
 
-function _shuffle() -- test for shuffle
+-- Test for shuffle:
+
+function _shuffle() 
   for i=1,40 do
     local t = shuffle{1,2,3,4,5,6}
     local t1={}
@@ -83,9 +69,8 @@ function _shuffle() -- test for shuffle
   end
 end
 
--- ### Any item in  list
--- You know?
--- xxx
+-- ### Any 
+-- Any item in a table.
 
 function any(t)
   local pos =  math.floor(0.5 + r() * #t)

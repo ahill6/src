@@ -21,23 +21,25 @@ function abs(x)   return x >= 0 and x or -1*x end
 
 ```
 
-
 ### Rounding
-
-
-
-- `rnd` is the simplest, sends it to the nearest integer;
-- `pround` does the same, but multiplies by 100;
-- `round` is the most complex. Rounded to some factor `f`.
-
+`rnd` is the simplest, sends it to the nearest integer;
 ```lua
-
 
 function rnd(x)
   return math.floor(x + 0.5) end
 
+```
+
+`pround` does the same, but multiplies by 100;
+```lua
+
 function pround(num)
   return math.floor(100*num+0.5) end
+
+```
+
+`round` is the most complex. Rounded to some factor `f`.
+```lua
 
 function round(num,f)
   if f and f>0 then
@@ -49,27 +51,18 @@ end
 
 ```
 
-
-
 ## Lists
-
-### Basic Stuff
-
 ```lua
-
+--- ### Basic Stuff
 
 function first(x) return x[1]  end
 function last(x)  return x[#x] end
 
 ```
 
-
 ### Shuffle
-
 `Shuffle` randomly reorganizes the slots in  table.
-
 ```lua
-
 
 function shuffle( t )
   for i= 1,#t do
@@ -79,7 +72,12 @@ function shuffle( t )
   return t
 end
 
-function _shuffle() -- test for shuffle
+```
+
+Test for shuffle:
+```lua
+
+function _shuffle() 
   for i=1,40 do
     local t = shuffle{1,2,3,4,5,6}
     local t1={}
@@ -92,9 +90,8 @@ end
 
 ```
 
-### Any item in  list
-You know?
-xxx
+### Any 
+Any item in a table.
 ```lua
 
 function any(t)
