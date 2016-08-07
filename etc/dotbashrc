@@ -153,7 +153,7 @@ lua2md() {
     in=${stem}.lua
     out=${stem}.md
     gawk '
-    gsub(/^-- /,"") {  Pre = Pre  $0 ; next }
+    gsub(/^-- /,"") {  Pre = Pre  "\n"$0 ; next }
     gsub(/^--\[=\[/,"",$0) { if (In) print "```" ; In = 0; }
     gsub(/^--\]=\]/,"",$0) { In = 1 ; print "```lua" } x   
                         1  { if (Pre) { 

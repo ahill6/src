@@ -91,7 +91,11 @@ function _shuffle() -- test for shuffle
 end
 
 ```
-### Any item in  list  You know?xxx
+
+### Any item in  list
+
+You know?
+xxx
 ```lua
 
 function any(t)
@@ -279,7 +283,11 @@ end end end
 
 -------------------------------------------------------
 ```
-print table contentsprint tables in sorted key orderdont print private keys (starting with "_")block recursive infinite loops
+
+print table contents
+print tables in sorted key order
+dont print private keys (starting with "_")
+block recursive infinite loops
 ```lua
 _tostring = tostring
 
