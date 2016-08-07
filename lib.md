@@ -1,5 +1,10 @@
 
 
+<img 
+ align=right
+ src="https://upload.wikimedia.org/wikipedia/en/0/04/Duracell_Bunny.png"
+>
+
 # lib.lua
 
 LUA is a "batteries not included" language so
@@ -52,8 +57,8 @@ end
 ```
 
 ## Lists
+### Basic Stuff
 ```lua
---- ### Basic Stuff
 
 function first(x) return x[1]  end
 function last(x)  return x[#x] end
