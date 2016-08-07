@@ -4,13 +4,14 @@
 
 # lib.lua
 
-LUA is a "batteries not included" language so
-LUA programmers usually store their favorite functions in
-their own special library file. 
+LUA is a "batteries not included" language so LUA programmers usually store
+their favorite _batteries_ their own special library file.
 
-Here's mine:
+Hence, I include below, my batteries.
 
-## Maths
+
+
+## Maths Functions 
 
 ### Basic Stuff
 
@@ -27,16 +28,14 @@ function abs(x)   return x >= 0 and x or -1*x end
 `rnd` is the simplest, sends it to the nearest integer;
 ```lua
 
-function rnd(x)
-  return math.floor(x + 0.5) end
+function rnd(x) return math.floor(x + 0.5) end
 
 ```
 
 `pround` does the same, but multiplies by 100;
 ```lua
 
-function pround(num)
-  return math.floor(100*num+0.5) end
+function pround(num) return math.floor(100*num+0.5) end
 
 ```
 
@@ -62,7 +61,7 @@ function last(x)  return x[#x] end
 
 ```
 
-### Shuffle
+### Shuffle(table)
 `Shuffle` randomly reorganizes the slots in  table.
 ```lua
 
@@ -92,7 +91,7 @@ end
 
 ```
 
-### Any 
+### Any(table) 
 Any item in a table.
 ```lua
 
@@ -103,15 +102,19 @@ end
 
 ```
 
-
-## String
-
+## String Functions
+### Dot(thing)
+Write to screen, no new line.
 ```lua
 
+function dot(x)  io.write(x); io.flush() end
 
-function dot(x) -- write without new line
-  io.write(x); io.flush()
-end
+```
+
+### Sub(table, first [,last])
+Returns the subtable from index `first` to `last`
+(and if `last` is omitted, go to end of table
+```lua
 
 function sub(t, first, last)
   last = last or #t
@@ -123,13 +126,20 @@ function sub(t, first, last)
   return out
 end
 
-function same(x) return x end
-
-
 ```
+ 
 
+## Random Numbers
 
-## String
+Lua's random number generator gives different results when
+run on different platforms. So here is one that works the
+same on any computer.
+
+The high-level interface is
+
+- `rseed(integer)` : reset the random number seed to `integer` or,
+  if omitted, to the magic value of `seed0`.
+- `r()` returns a random number between zero and one.
 
 ```lua
 
@@ -187,8 +197,11 @@ function plus(old,new)
   return old
 end
 
+
+
 function copy(t)        return type(t) ~= 'table' and t or collect(t,copy) end
 function shallowCopy(t) return map(t,same) end
+function same(x) return x end
 
 function member(x,t)
   for _,y in pairs(t) do
