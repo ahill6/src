@@ -149,11 +149,14 @@ mds() {
 m() { (mds . ); }
 
 lua2md() {
-  stem=${1%.*}
-  gawk '
-  gsub(/--\[=\[/,"",$0) { if (In) print "```" ; In = 0; }
-  gsub(/--\]=\]/,"",$0) { In = 1 ; print "```lua" } 
-                      1 
-                    END { if (In) print "```" } ' ${stem}.lua > ${stem}.md
-  git add ${stem}.md
+    stem=${1%.*}
+    in=${stem}.lua
+    out=${stem}.md
+    echo $stem $in $out
+    gawk '
+    gsub(/--\[=\[/,"",$0) { if (In) print "```" ; In = 0; }
+    gsub(/--\]=\]/,"",$0) { In = 1 ; print "```lua" } 
+                        1 
+                      END { if (In) print "```" } ' $in > $out
+    git add $out
 }
