@@ -122,7 +122,6 @@ gitpull() {
     git pull origin master
 }
 ready() {
-    ok
     gitting
 }
 gitting() {
@@ -133,4 +132,28 @@ gitting() {
     git config credential.helper 'cache --timeout=3600'
 }
 
+mds() {
+    cd $1
+    if [ -f "*.luas" ]; then
+        for lua in *.lua; do
+            lua2md $lua > ${lua%.*}.md
+        done
+    fi
+    for f in *; do
+        if [ -d "${f}" ]; then
+            (mds "$f")
+        fi
+    done
+}
 
+m() { (mds . ); }
+
+lua2md() {
+  stem=${1%.*}
+  gawk '
+  gsub(/--\[=\[/,"",$0) { if (In) print "```" ; In = 0; }
+  gsub(/--\]=\]/,"",$0) { In = 1 ; print "```lua" } 
+                      1 
+                    END { if (In) print "```" } ' ${stem}.lua > ${stem}.md
+  git add ${stem}.md
+}

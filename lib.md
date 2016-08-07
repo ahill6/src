@@ -1,4 +1,4 @@
---[=[
+
 
 # lib.lua
 
@@ -11,15 +11,18 @@ Here's mine:
 ## Maths
 
 Basic stuff:
---]=]
+```lua
+
 function max(a,b) return a > b and a or b end
 function min(a,b) return a < b and a or b end
 function abs(x)   return x >= 0 and x or -1*x end
---[=[
+```
+
 
 aa
 
---]=]
+```lua
+
 function pround(num)
   return math.floor(100*num+0.5)
 end
@@ -31,11 +34,13 @@ function round(num, idp)
   end
   return math.floor(num + 0.5)
 end
---[=[
+```
+
 
 ## Lists
 
---]=]
+```lua
+
 function first(x) return x[1]  end
 function last(x)  return x[#x] end
 
@@ -308,3 +313,4 @@ end
 
 
 
+```
