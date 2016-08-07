@@ -22,7 +22,7 @@ function abs(x)   return x >= 0 and x or -1*x end
 
 ### Rounding
 
-Three ways to round numbers:
+
 
 - `rnd` is the simplest, sends it to the nearest integer;
 - `pround` does the same, but multiplies by 100;
@@ -84,7 +84,6 @@ function _shuffle() -- test for shuffle
 end
 
 -- ### Any item in  list
--- 
 -- You know?
 -- xxx
 
