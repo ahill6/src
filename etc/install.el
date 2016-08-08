@@ -16,6 +16,11 @@
 
         ; list of packages to be installed
         '(zenburn-theme
+          material-theme
+          monokai-theme
+          leuven-theme
+          spacemacs-theme
           neotree
+          powerline
           markdown-mode
           color-theme))

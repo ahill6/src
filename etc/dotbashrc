@@ -43,6 +43,15 @@ cat << 'EOF' > "$Edot"
 (require 'neotree)
 (require 'deft)
 (require 'recentf)
+(require 'powerline)
+
+(powerline-default-theme)
+(powerline-default-theme)
+(powerline-center-theme)
+(powerline-center-evil-theme)
+(powerline-vim-theme)
+(powerline-nano-theme)
+
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -105,6 +114,10 @@ cat << 'EOF' > "$Edot"
       (hs-minor-mode t)))
 
 (load-theme 'zenburn t)
+;(load-theme 'leuven t)
+;(load-theme 'material-light t)
+;(load-theme 'material t)
+
 EOF
 
 reload() { . "$Here"/etc/dotbashrc ; }

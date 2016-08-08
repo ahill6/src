@@ -4,7 +4,7 @@ local IGNORE = "?"    -- marks which columns or cells to ignore
 
 local _ID = 0
 local function ID()
-  _ID = _ID + 1;
+  _ID = _ID + 1;   -- xx
   return _ID
 end 
 
