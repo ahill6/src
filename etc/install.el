@@ -1,4 +1,4 @@
-; run with emacs --script install.el
+; run with emacs -script install.el
 
 (require 'package)
 
@@ -8,7 +8,7 @@
                          ("marmalade" . "https://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.org/packages/")))
 
-        (package-initialize)
+(package-initialize)
 
 
 (mapcar (lambda (package)

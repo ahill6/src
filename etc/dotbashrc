@@ -49,10 +49,11 @@ cat << 'EOF' > "$Edot"
 (require 'imenu)
 (require 'powerline)
 
+(powerline-default-theme)
  (global-set-key (kbd "C-.") 'imenu-anywhere)
 
 (ido-mode t)
-(powerline-default-theme)
+
 (global-set-key [f9] 'neotree-toggle)
 
 (neotree-toggle)
