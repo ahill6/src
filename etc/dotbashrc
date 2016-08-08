@@ -22,7 +22,7 @@ e() { "$Ed" -q -l "$Edot" $* &  # $Edot defined below
 }
 
 cat << 'EOF' > "$Edot"
-(setq tags-file-name "tags")
+(setq tags-file-name "TAGS")
 (tool-bar-mode -1)
 
 (add-to-list 'load-path "~/gits/s-more/src/etc/")

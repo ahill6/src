@@ -1,0 +1,91 @@
+
+lib.lua,874
+function max(20,332
+function min(21,378
+function abs(22,424
+function rnd(27,551
+function pround(31,650
+function round(35,768
+function first(46,953
+function last(47,988
+function shuffle(52,1102
+function _shuffle(62,1263
+function any(76,1478
+function dot(85,1649
+function sub(91,1831
+function map(132,2778
+function maps(137,2853
+function collect(144,2946
+function select(151,3065
+function plus(161,3213
+function copy(171,3333
+function shallowCopy(172,3412
+function same(173,3459
+function member(175,3490
+function f3(181,3594
+function f5(182,3644
+function s3(184,3695
+function s5(185,3744
+function nstr(187,3794
+function args(197,3922
+function _args(222,4559
+function rogue(235,4743
+local function stringkeys(265,5436
+function keys(272,5568
+function ordered(283,5770
+function eman(297,6083
+function tostring(302,6165
+function xtend(365,7509
+
+smore.lua,1467
+local function ID(6,94
+local function SYM(11,158
+local function NUM(14,231
+local function nump(17,304
+local function ROW(20,353
+local function TBL(23,432
+local function RANGE(28,592
+local function RANGES(33,727
+local function NWHERE(39,876
+local function DICHOTOMIZE(43,962
+local function NODE(47,1026
+local function sym1(51,1221
+local function num1(61,1450
+function unnum(71,1702
+function unsym(79,1911
+local function thing1(86,2050
+local function unthing1(87,2128
+local function sym0(89,2207
+local function num0(90,2270
+local function sd(92,2334
+local function norm(96,2410
+local function smallEffect(101,2517
+local function different(111,2870
+local function bdom(137,3874
+function _different(150,4230
+local function ent(163,4517
+local function ke(171,4653
+local function csv(183,4886
+local function row1(221,5998
+function csv2tbl(261,7360
+function rows2tbl(266,7446
+function _csv(273,7584
+function normys(283,7788
+function z(291,7976
+function nwhere(297,8072
+function nwhering(299,8132
+function _row(368,10297
+function _nwhere(381,10732
+function ranges(391,10962
+function ranging(393,11026
+local function thingScore(447,13010
+function bestThing(469,13488
+function dichotomize(483,13875
+function dichotomize_(485,13950
+function dichotomizing(488,14026
+function treeshow(505,14474
+function _ranges1(518,14853
+function _dich(532,15228
+function summary(558,15826
+function _ranges2(572,16290
+function _demos(594,16876
