@@ -1,3 +1,4 @@
 Here=$(pwd)
+etags *.lua
 emacs -script $Here/etc/install.el
 Here=$Here bash --init-file etc/dotbashrc  -i
