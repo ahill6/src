@@ -1,6 +1,7 @@
 # -*- sh -*- 
 
 what="ELL"
+echo 
 echo "$what v1.0 (c) 2016 Tim Menzies, MIT (v2) license"
 echo "\"I tread paths by moonlight that others fear to speak of during day.\" --Rothfuss"
 echo
@@ -86,7 +87,6 @@ cat << 'EOF' > "$Edot"
   (setq scroll-step              1)
   (show-paren-mode               t))
 
-
 (setq display-time-day-and-date t) (display-time) 
 (setq-default indent-tabs-mode nil) 
 
@@ -107,6 +107,9 @@ cat << 'EOF' > "$Edot"
       (local-set-key (kbd "C-c <up>")    'hs-hide-all)
       (local-set-key (kbd "C-c <down>")  'hs-show-all)
       (hs-minor-mode t)))
+
+(add-hook 'latex-mode-hook 'turn-on-flyspell)
+(add-hook 'markdown-mode-hook 'turn-on-flyspell)
 
 (load-theme 'zenburn t)
 
