@@ -1,4 +1,4 @@
-% run with emacs --script install.el
+; run with emacs --script install.el
 
 (require 'package)
 

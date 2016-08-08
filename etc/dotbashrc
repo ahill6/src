@@ -50,7 +50,6 @@ cat << 'EOF' > "$Edot"
 
 (ido-mode t)
 
-
 (setq deft-extensions '("md" "txt" "tex"))
 (setq deft-directory "~/gits/s-more/src/doc")
 (setq deft-recursive t)

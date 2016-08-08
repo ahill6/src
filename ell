@@ -1,1 +1,3 @@
-Here=$(pwd) bash --init-file etc/dotbashrc  -i
+Here=$(pwd)
+emacs -script $Here/etc/install.el
+Here=$Here bash --init-file etc/dotbashrc  -i
