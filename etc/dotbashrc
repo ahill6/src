@@ -25,6 +25,8 @@ cat << 'EOF' > "$Edot"
 (setq tags-file-name "TAGS")
 (tool-bar-mode -1)
 
+
+
 (add-to-list 'load-path "~/gits/s-more/src/etc/")
 (setq ispell-program-name "/usr/local/bin/ispell")
 
@@ -44,7 +46,10 @@ cat << 'EOF' > "$Edot"
 (require 'neotree)
 (require 'deft)
 (require 'recentf)
+(require 'imenu)
 (require 'powerline)
+
+ (global-set-key (kbd "C-.") 'imenu-anywhere)
 
 (ido-mode t)
 (powerline-default-theme)
