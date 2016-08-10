@@ -133,8 +133,11 @@ cat << 'EOF' > "$Edot"
 (add-hook 'latex-mode-hook 'turn-on-flyspell)
 (add-hook 'markdown-mode-hook 'turn-on-flyspell)
 
-(load-theme 'zenburn t)
-
+%(load-theme 'zenburn t)
+%(color-theme-dark-blue)
+%(color-theme-ld-dark)
+%(color-theme-midnight)
+ (color-theme-resolve)
 EOF
 
 reload() { . "$Here"/etc/dotbashrc ; }
