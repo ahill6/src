@@ -10,6 +10,8 @@ Ed="/Applications/Emacs.app/Contents/MacOS/Emacs"
 Edot="$Here/etc/dotemacs"
 Vdot="$Here/etc/dotvimrc"
 
+ln -sf $Here/etc/shell $HOME/shell
+
 e() { "$Ed" -q -l "$Edot" $* &  
 }
 
