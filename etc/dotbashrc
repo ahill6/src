@@ -6,6 +6,18 @@ echo "$what v1.0 (c) 2016 Tim Menzies, MIT (v2) license"
 echo "\"I tread paths by moonlight that others fear to speak of during day.\" --Rothfuss"
 echo
 
+Ed="/Applications/Emacs.app/Contents/MacOS/Emacs"
+Edot="$Here/etc/dotemacs"
+Vdot="$Here/etc/dotvimrc"
+
+e() { "$Ed" -q -l "$Edot" $* &  
+}
+
+v() { mvim  -u "$Vdot" $* &  
+}
+
+reload() { . "$Here"/etc/dotbashrc ; }
+	
 mine=/tmp/$USER/$$
 tmp=/tmp/$USER/$$/tmp
 mkdir -p ${mine} ${tmp}
@@ -15,133 +27,6 @@ Seed=0
 trap zap 0 1 2 3 4 15 # catches normal end, Control-C, Control-D etc
 zap() { echo "Zapping..." ; rm -rf "$Tmp"; }
 
-Ed="/Applications/Emacs.app/Contents/MacOS/Emacs"
-Edot="/tmp/edot$$"
-
-e() { "$Ed" -q -l "$Edot" $* &  # $Edot defined below 
-}
-
-cat << 'EOF' > "$Edot"
-(setq tags-file-name "TAGS")
-(tool-bar-mode -1)
-
-
-
-(add-to-list 'load-path "~/gits/s-more/src/etc/")
-(setq ispell-program-name "/usr/local/bin/ispell")
-
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
-
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
-  (package-initialize))
-
-(require 'ido)
-(require 'neotree)
-(require 'deft)
-(require 'recentf)
-(require 'imenu)
-(require 'powerline)
-
-(powerline-default-theme)
- (global-set-key (kbd "C-.") 'imenu-anywhere)
-
-(ido-mode t)
-
-(global-set-key [f9] 'neotree-toggle)
-
-(neotree-toggle)
-
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-
-
-
-(setq deft-extensions '("md" "txt" "tex"))
-(setq deft-directory "~/gits/s-more/src/doc")
-(setq deft-recursive t)
-(global-set-key [f8] 'deft)
-(setq deft-use-filename-as-title t)
-
-
-
-(require 'lua-block)
-(lua-block-mode t)
-(setq lua-indent-level 2)
-
-(progn
-  (setq require-final-newline    t) 
-  (setq next-line-add-newlines nil) 
-  (setq inhibit-startup-message  t)
-  (setq-default fill-column     80)
-  (setq column-number-mode       t)
-  (setq make-backup-files      nil) 
-  (transient-mark-mode           t)
-  (global-font-lock-mode         t)
-  (global-hl-line-mode           0)  
-  (xterm-mouse-mode              t)
-  (setq scroll-step              1)
-  (show-paren-mode               t))
-
-(setq display-time-day-and-date t) (display-time) 
-(setq-default indent-tabs-mode nil) 
-
-(setq frame-title-format
-  '(:eval
-    (if buffer-file-name
-        (replace-regexp-in-string
-         "\\\\" "/"
-         (replace-regexp-in-string
-          (regexp-quote (getenv "HOME")) "~"
-          (convert-standard-filename buffer-file-name)))
-      (buffer-name))))
-
-(add-hook 'python-mode-hook
-   (lambda ()
-       (setq indent-tabs-mode nil
-             tab-width 2)
-       (setq python-indent 2)))
-
-(add-hook 'python-mode-hook
-  (lambda()
-    (local-set-key (kbd "C-c <right>") 'hs-show-block)
-    (local-set-key (kbd "C-c <left>")  'hs-hide-block)
-    (local-set-key (kbd "C-c <up>")    'hs-hide-all)
-    (local-set-key (kbd "C-c <down>")  'hs-show-all)
-    (hs-minor-mode t)))
-
-(add-hook 'lua-mode-hook
-   (lambda ()
-      (local-set-key (kbd "C-c <right>") 'hs-show-block)
-      (local-set-key (kbd "C-c <left>")  'hs-hide-block)
-      (local-set-key (kbd "C-c <up>")    'hs-hide-all)
-      (local-set-key (kbd "C-c <down>")  'hs-show-all)
-      (hs-minor-mode t)))
-
-(add-hook 'latex-mode-hook 'turn-on-flyspell)
-(add-hook 'markdown-mode-hook 'turn-on-flyspell)
-
-%(load-theme 'zenburn t)
-%(color-theme-dark-blue)
-%(color-theme-ld-dark)
-%(color-theme-midnight)
- (color-theme-resolve)
-EOF
-
-reload() { . "$Here"/etc/dotbashrc ; }
-	
 here() { cd $1; basename "$PWD"; }
 
 PROMPT_COMMAND='echo  -ne "${what}:\033]0; $(here ..)/$(here .)\007"

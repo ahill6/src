@@ -1,0 +1,141 @@
+set nocompatible              " required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
+
+set number
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+set backupdir-=.
+set backupdir^=~/tmp,/tmp
+
+"ascii mouse
+set mouse=a
+
+""place buffer name into window title
+set title
+
+set splitbelow
+set splitright
+
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
+
+Plugin 'tmhedberg/SimpylFold'
+
+" auto-change directory to that of the current buffer
+autocmd BufEnter * cd %:p:h
+" Shows the matching bracket when entering expressions
+" (you'll never miss one again!)
+set showmatch
+set matchtime=15
+"pretty colors
+set background=light
+set syntax=on
+let python_highlight_all=1
+syntax on
+syntax enable
+"" Incremental search
+" (as you type in the search query, it will show you
+" whether your query currently matches anything)
+set ignorecase
+set incsearch
+set smartcase
+" source code indenting
+set smarttab
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set expandtab ts=2 sw=2 ai
+
+Plugin 'scrooloose/syntastic'
+
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
+if has('gui_running')
+    set background=dark
+    colorscheme torte
+ else
+    colorscheme desert
+ endif
+ call togglebg#map("<F5>")
+
+
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+au BufNewFile,BufRead *.js,*.html,*.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 
+
+
+Plugin 'bling/vim-airline'
+Plugin 'majutsushi/tagbar'
+ 
+nmap <F8> :TagbarToggle<CR>
+
+"" Enable the list of buffers
+"let g:airline#extensions#tabline#enabled = 1
+"
+"" Show just the filename
+"let g:airline#extensions#tabline#fnamemod = ':t'
+"
+"" This allows buffers to be hidden if you've modified a buffer.
+"" " This is almost a must if you wish to use buffers in this way.
+"set hidden
+""
+"" " To open a new empty buffer
+"" " This replaces :tabnew which I used to bind to this mapping
+"nmap <leader>T :enew<cr>
+""
+"" " Move to the next buffer
+"nmap <leader>l :bnext<CR>
+""
+"" " Move to the previous buffer
+"nmap <leader>h :bprevious<CR>
+""
+"" " Close the current buffer and move to the previous one
+"" " This replicates the idea of closing a tab
+"nmap <leader>bq :bp <BAR> bd #<CR>
+""
+"" " Show all open buffers and their status
+"nmap <leader>bl :ls<CR>
+"
+Plugin 'shougo/vimshell.vim'
+
+autocmd VimEnter * NERDTree
+autocmd BufEnter * NERDTreeMirror
+
+

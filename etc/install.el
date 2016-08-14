@@ -18,6 +18,8 @@
 
         ; list of packages to be installed
         '(zenburn-theme
+	  diff-hl
+
           neotree
           powerline
           markdown-mode
