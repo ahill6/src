@@ -285,7 +285,6 @@ function ordered(t)
   for k,v in pairs(t) do
     tmp[#tmp+1] = {_tostring(k),k,v} end
   table.sort(tmp,function (x,y) return first(x) < first(y) end)
-  print(tmp[1])
   local i = 0
   return function()
     if i < #tmp then
