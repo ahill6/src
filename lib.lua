@@ -21,6 +21,14 @@ function max(a,b) return a > b and a or b end
 function min(a,b) return a < b and a or b end
 function abs(x)   return x >= 0 and x or -1*x end
 
+-- Test for max:
+
+function _max()
+  print({1,2}, max(1,2))
+  print({6,3}, max(6,3))
+  print({1000, 1001}, max(1000, 1001))
+end
+
 -- ### Rounding
 -- `rnd` is the simplest, sends it to the nearest integer;
 
