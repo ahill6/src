@@ -31,6 +31,16 @@ function _max()
   print({42.4, 42.51}, max(42.4, 42.51))
 end
 
+-- Test for min:
+
+function _min()
+  print({1,2}, min(1,2))
+  print({6,3}, min(6,3))
+  print({23, 24}, min(23, 24))
+  print({'a', 'b'}, min('a','b'))
+  print({42.4, 42.51}, min(42.4, 42.51))
+end
+
 -- ### Rounding
 -- `rnd` is the simplest, sends it to the nearest integer;
 
