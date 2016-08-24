@@ -26,7 +26,9 @@ function abs(x)   return x >= 0 and x or -1*x end
 function _max()
   print({1,2}, max(1,2))
   print({6,3}, max(6,3))
-  print({1000, 1001}, max(1000, 1001))
+  print({23, 24}, max(23, 24))
+  print({'a', 'b'}, max('a','b'))
+  print({42.4, 42.51}, max(42.4, 42.51))
 end
 
 -- ### Rounding
