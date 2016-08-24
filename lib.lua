@@ -41,6 +41,14 @@ function _min()
   print({42.4, 42.51}, min(42.4, 42.51))
 end
 
+-- Test for abs:
+
+function _abs()
+  print(5, abs(5))
+  print(-6, abs(-6))
+  print(0, abs(0))
+end
+
 -- ### Rounding
 -- `rnd` is the simplest, sends it to the nearest integer;
 
