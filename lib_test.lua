@@ -67,3 +67,13 @@ function round_test()
   assert(round(-3.333, 1) == -3.3)
 end
 
+-- Test for first:
+
+function first_test()
+  assert(first({1, 2}) == 1)
+  assert(first({1, 2, 3, 4, 5}) == 1)
+  assert(first({32, 16, 8, 4, 2}) == 32)
+  assert(first({9, 7, 53.2, 0}) == 9)
+  assert(first({11}) == 11)
+end
+
