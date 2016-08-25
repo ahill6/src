@@ -56,3 +56,14 @@ function pround_test()
   assert(pround(.915345) == 92)
 end
 
+-- Test for round:
+
+function round_test()
+  assert(round(15.29, 0) == 15)
+  assert(round(15.29, 1) == 15.3)
+  assert(round(15.29, 2) == 15.29)
+  assert(round(1.123456789, 3) == 1.123)
+  assert(round(1.123456789, 7) == 1.1234568)
+  assert(round(-3.333, 1) == -3.3)
+end
+
