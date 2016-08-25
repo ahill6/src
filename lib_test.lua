@@ -34,4 +34,15 @@ function abs_test()
   assert(abs(0) == 0)
 end
 
+-- Test for rnd:
+
+function rnd_test()
+  assert(rnd(4.2) == 4)
+  assert(rnd(5.5) == 6)
+  assert(rnd(9) == 9)
+  assert(rnd(-5.1) == -5)
+  assert(rnd(-11) == -11)
+  assert(rnd(-1.5) == -1)
+end
+
 
