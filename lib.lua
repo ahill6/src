@@ -24,29 +24,29 @@ function abs(x)   return x >= 0 and x or -1*x end
 -- Test for max:
 
 function _max()
-  print({1,2}, max(1,2))
-  print({6,3}, max(6,3))
-  print({23, 24}, max(23, 24))
-  print({'a', 'b'}, max('a','b'))
-  print({42.4, 42.51}, max(42.4, 42.51))
+  assert(max(1,2) == 2)
+  assert(max(6,3) == 3)
+  assert(max(23, 24) == 24)
+  assert(max('a','b' == 'b'))
+  assert(max(42.4, 42.51) == 42.51)
 end
 
 -- Test for min:
 
 function _min()
-  print({1,2}, min(1,2))
-  print({6,3}, min(6,3))
-  print({23, 24}, min(23, 24))
-  print({'a', 'b'}, min('a','b'))
-  print({42.4, 42.51}, min(42.4, 42.51))
+  assert(min(1,2) == 1)
+  assert(min(6,3) == 3)
+  assert(min(23, 24) == 23)
+  assert(min('a','b') == 'a')
+  assert(min(42.4, 42.51) == 42.4)
 end
 
 -- Test for abs:
 
 function _abs()
-  print(5, abs(5))
-  print(-6, abs(-6))
-  print(0, abs(0))
+  assert(abs(5) == 5)
+  assert(abs(-6) == 6)
+  assert(abs(0) == 0)
 end
 
 -- ### Rounding
