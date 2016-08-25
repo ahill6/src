@@ -77,3 +77,13 @@ function first_test()
   assert(first({11}) == 11)
 end
 
+-- Test for last:
+
+function last_test()
+  assert(last({1,2}) == 2)
+  assert(last({1, 2, 3, 4, 5}) == 5)
+  assert(last({32, 16, 8, 4, 2}) == 2)
+  assert(last({9, 7, 53.2, 0}) == 0)
+  assert(last({11}) == 11)
+end
+
