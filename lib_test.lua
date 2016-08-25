@@ -45,4 +45,14 @@ function rnd_test()
   assert(rnd(-1.5) == -1)
 end
 
+-- Test for pround:
+
+function pround_test()
+  assert(pround(.41) == 41)
+  assert(pround(.901) == 90)
+  assert(pround(.019) == 2)
+  assert(pround(.595) == 60)
+  assert(pround(0) == 0)
+  assert(pround(.915345) == 92)
+end
 
