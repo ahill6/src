@@ -132,3 +132,28 @@ function any_test()
   assert(any{50} == 50)
 end
 
+-- Test for sub:
+
+function sub_test()
+  local t1 = {1, 2, 3, 4, 5}
+  local r1 = sub(t1, 2, 4)
+  assert(#r1 == 3)
+  assert(r1[1] == 2)
+  assert(r1[2] == 3)
+  assert(r1[3] == 4)
+
+  local t2 = {6, 7, 8, 9, 0}
+  local r2 = sub(t2, 4)
+  assert(#r2 == 2)
+  assert(r2[1] == 9)
+  assert(r2[2] == 0)
+
+  local t3 = {2, 4, 8, 6}
+  local r3 = sub(t3, 1)
+  assert(#r3 == #t3)
+  assert(r3[1] == 2)
+  assert(r3[2] == 4)
+  assert(r3[3] == 8)
+  assert(r3[4] == 6)
+end
+
