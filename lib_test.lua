@@ -178,3 +178,26 @@ function r_test()
   assert(abs((median) - 0.5) < 0.02) -- ensure median is roughly halfway
 end
 
+-- Test for rseed:
+
+function rseed_test()
+  local t = {}
+  rseed(42)
+  for i = 1,20 do
+    t[i] = r()
+  end
+  rseed(42)
+  for i = 1,20 do
+    assert(t[i] == r())
+  end
+
+  t = {}
+  rseed(9000)
+  for i = 1,20 do
+    t[i] = r()
+  end
+  rseed(9000)
+  for i = 1,20 do
+    assert(t[i] == r())
+end end
+
