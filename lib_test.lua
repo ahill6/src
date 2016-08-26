@@ -201,3 +201,20 @@ function rseed_test()
     assert(t[i] == r())
 end end
 
+-- Test for map:
+
+function map_test()
+  local r1 = {}
+  map({1, 2, 3, 4, 5}, function(x) r1[#r1+1] = x-5 end)
+
+  for k,v in pairs(r1) do
+    assert(v == k - 5)
+  end
+
+  local r2 = {{}, {}, {}}
+  map(r2, function(x) x['test'] = 1 end)
+
+  for k,v in pairs(r2) do
+    assert(v['test'] == 1)
+end end
+
