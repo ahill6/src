@@ -113,3 +113,22 @@ function shuffle_test()
   assert(#(shuffle{}) == 0)
 end
 
+-- Test for any:
+
+function any_test()
+  rseed(42) -- ensure same outcome each test
+
+  local testlist = {1, 2, 3, 4, 5}
+  for i=1,20 do
+    local result = any(testlist)
+    local inlist = false
+    for k, v in pairs(testlist) do
+      if v == result then
+        inlist = true
+        break
+    end end
+    assert(inlist)
+  end
+  assert(any{50} == 50)
+end
+
