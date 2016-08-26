@@ -87,3 +87,29 @@ function last_test()
   assert(last({11}) == 11)
 end
 
+-- Test for shuffle:
+
+function shuffle_test()
+  rseed(42) -- ensure same outcome each test
+
+  local origlist = {1, 2, 3, 4, 5} -- for this test, needs unique values
+  local allsame = true
+
+  for i=1,20 do
+    local testlist = {1, 2, 3, 4, 5} -- same as origlist
+    local seen = {}
+
+    local result = shuffle(testlist)
+    assert(#result == #origlist)
+
+    for k, v in pairs(result) do -- make sure that every value is seen exactly once
+      assert(seen[v] == nil)
+      seen[v] = true
+      if origlist[k] ~= v then -- Check that the order changed at least once
+        allsame = false
+  end end end
+  assert(not allsame)
+  assert((shuffle{99})[1] == 99)
+  assert(#(shuffle{}) == 0)
+end
+
