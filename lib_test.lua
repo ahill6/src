@@ -157,3 +157,24 @@ function sub_test()
   assert(r3[4] == 6)
 end
 
+-- Test for r:
+
+function r_test()
+  rseed(42) -- ensure same outcome each test
+
+  local t = {}
+  local acc = 0 -- accumulator
+  for i = 1,5000 do -- need decent sample size
+    t[#t+1] = r()
+    acc = acc + t[#t]
+  end
+  table.sort(t)
+  local median = t[#t/2]
+  if #t % 2 == 0 then
+    median = (t[math.floor(#t/2.0)] + t[math.ceil(#t/2.0)]) / 2
+  end
+  local mean = acc / #t
+  assert(abs((mean) - 0.5) < 0.02) -- ensure mean is roughly halfway
+  assert(abs((median) - 0.5) < 0.02) -- ensure median is roughly halfway
+end
+
