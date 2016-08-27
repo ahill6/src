@@ -23,7 +23,7 @@ end
 
 function attrs(t,x) return t[x] and #t[x] or 0 end
 
-function train(f)
+function train(f) -- should be an iteratpr
   local t,h,n={},{},nil
   for n0,t,what,names in csv(f) do
     n = n0
