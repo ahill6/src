@@ -37,12 +37,12 @@ function eman(296,6067
 function tostring(301,6149
 function xtend(364,7493
 
-nb.lua,112
+nb.lua,111
 function csv(1,0
-function inc3(19,446
-function attrs(26,604
-function train(28,656
-function classify(39,863
+function inc3(19,468
+function rprint(25,616
+function classify(39,876
+function nb(58,1393
 
 smore.lua,1467
 local function ID(6,94
