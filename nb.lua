@@ -26,17 +26,22 @@ end
 function attrs(t,x) return t[x] and #t[x] or 0 end
 
 function train(f)
-  local f,h,n={},{},nil
+  local t,h,n={},{},nil
   for n0,t,what,names in csv(f) do
     n = n0
     h[what] = (h[what] or 0) + 1
     for i,x in ipairs(t) do
-      inc3(f,names[i],val) 
+      inc3(t,names[i],val) 
   end end
-  return f,h,n
+  return t,h,n
 end
 
-function classify()
+function classify(f,t,h,n)
+  for _,t,actual,names in csv(f) do
+    local like = -100000
+    for _,klass in ipairs(t):
+      local tmp = math.log(
+  end
 end
 
 nb('data/data101.csv') 
