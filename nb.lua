@@ -12,9 +12,7 @@ function csv(f)
         n = n + 1
         if n==1 then names = t else
           return n,t,t[#t],names
-        end
-      end
-end end end
+end end end end end
 
 function inc3(t, x, y)
     local tx = t[x]
