@@ -33,9 +33,9 @@ function rogue(235,4743
 local function stringkeys(265,5436
 function keys(272,5568
 function ordered(283,5770
-function eman(297,6083
-function tostring(302,6165
-function xtend(365,7509
+function eman(296,6067
+function tostring(301,6149
+function xtend(364,7493
 
 smore.lua,1467
 local function ID(6,94
